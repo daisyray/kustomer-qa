@@ -10,7 +10,7 @@ module.exports = {
     commands: [
         {
             get_url: function () {
-                return this.launchUrl + consts.login_url_suffix;
+                return this.api.launch_url + consts.login_url_suffix;
             },
 
             login: function () {
@@ -23,7 +23,7 @@ module.exports = {
                     .waitForElementNotPresent('@email', consts.large_delay);
             },
             cancel_introduction_link: function () {
-                this.waitForElementVisible('@cancel_shepherd_link', this.large_delay);
+                this.waitForElementVisible('@cancel_shepherd_link', consts.large_delay);
                 this.click('@cancel_shepherd_link');
             }
         }

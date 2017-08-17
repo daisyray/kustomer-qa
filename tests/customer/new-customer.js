@@ -31,9 +31,8 @@ module.exports = {
 
     'Add New Customer Icon is Found' : function (browser) {
         const kustomer = browser.page.kustomer();
-        kustomer.bring_up_new_customer_popup();
         kustomer.navigate(kustomer.get_url());
-        kustomer.assert.elementPresent('@create_new_customer_icon');
+        kustomer.waitForElementVisible('@create_new_customer_icon', consts.medium_delay);
     },
 
     'create new customer is ok': function (browser) {
@@ -48,11 +47,11 @@ module.exports = {
 
     'empty customer name should fail': function (browser) {
         const customer = browser.page.kustomer();
-        kustomer.bring_up_new_customer_popup();
+        customer.bring_up_new_customer_popup();
 
-        kustomer.waitForElementVisible('@customer_name_box', consts.medium_delay)
+        customer.waitForElementVisible('@customer_name_box', consts.medium_delay)
                 .setValue('@customer_name_box', '')
                 .click('@save_changes_btn')
-                .assert.elementPresent('@customer_name_box'); // After an error, the popup should still exist
+                .waitForElementVisible('@customer_name_box', consts.large_delay); // After an error, the popup should still exist
     }
 };

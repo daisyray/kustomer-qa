@@ -9,7 +9,8 @@ module.exports = {
         create_new_customer_icon: 'i.icon-create-new',
         customer_name_box: {
             selector: '//form//input[@placeholder="Customer Name"]',
-            locateStrategy: 'xpath'
+            locateStrategy: 'xpath',
+            index: 0
         },
         company_name_box:'form div.Select-input input',
         customer_external_id: {
@@ -40,8 +41,9 @@ module.exports = {
     commands: [
         {
             get_url: function () {
-                return this.launchUrl + consts.home_page_url_suffix
+                return this.api.launch_url + consts.home_page_url_suffix
             },
+
             bring_up_new_customer_popup: function () {
                 this.navigate(this.get_url());
                 this.waitForElementVisible('@create_new_customer_icon', consts.large_delay)
@@ -61,8 +63,8 @@ module.exports = {
                     .open_phone_number_editor()
                     .pick_home_option()
                     .setValue('@phone_number_input', values.phone_number)
-                    .api.pause(consts.large_delay) // debug only
-                    .click('@save_changes_btn')
+                    .click('@save_changes_btn');
+                return this;
             },
 
             open_phone_number_editor: function () {
